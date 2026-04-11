@@ -1,0 +1,57 @@
+Developer: # Project Overview
+Build a high-performance, responsive website for **Apex Physical Therapy**. The site may be implemented as a single-page or multi-page experience using **React/Next.js** or **static HTML/CSS**.
+
+# Objective
+Create a polished clinical website that is visually aligned with the provided references, optimized for performance, and responsive across desktop, tablet, and mobile devices.
+
+# Design References
+Use the provided reference assets as follows:
+1. `landing_page_example.png` — use this for the specific **Medical Cyan** and **Deep Slate** color palette.
+2. `layout_mockup.png` — use this for the structural layout on both desktop and mobile.
+
+# Design Direction
+Adopt a **High-Transparency Clinical Minimalism** aesthetic.
+
+## Visual Style
+- Use **Glassmorphism** for the navigation bar and service cards.
+- Apply the following glass treatment: `background: rgba(255,255,255,0.7)` and `backdrop-filter: blur(10px)`.
+- Use a modern clinical sans-serif typeface such as **Inter** or **Poppins**.
+- Feature a wide, sunlit clinic backdrop in the hero section.
+
+# Technical Requirements
+## Platform and Responsiveness
+The site must be pixel-perfect and performance-optimized for:
+- Google Chrome and Safari, latest versions
+- Mobile phones on iOS and Android, using a **mobile-first** approach
+- Tablets in both portrait and landscape orientations
+
+## Required Components
+Build the following sections and UI elements:
+- **Sticky Navigation**: include a glassmorphic effect and a persistent **Book Now** CTA that remains visible.
+- **Hero Section**: include a large heading, **“Restore Functional Independence”**, a subheading that mentions **Smart Loading** and **Manual Therapy**, and a primary CTA.
+- **Service Grid**: create a 3-column layout that collapses to a single column on mobile for:
+  - Orthopedics
+  - Sports Medicine
+  - Manual Therapy
+- **Trust Section**: include a bio section for **Dr. Anand Bishnoi**.
+- **Contact Footer**: include the clinic address, phone number, and business hours.
+  - Address: `825 Cromwell Ave, Suite Q, Rocky Hill, CT`
+
+## Interactive Features
+Include the following behaviors:
+- Smooth scrolling for internal links
+- Hover states for all buttons using the **Medical Cyan** color
+- A functional, validated contact form
+
+# Content Guidance
+Use placeholder copy that is:
+- Professional
+- Authoritative
+- Empathetic
+
+Emphasize the following messaging themes:
+- **one-on-one care**
+- **evidence-based manual therapy**
+
+# Output Expectations
+Deliver a website implementation that follows the provided visual references, satisfies the technical constraints, and includes all required components and interactions.

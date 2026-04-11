@@ -1,0 +1,328 @@
+/* Main Stylesheet - Apex Physical Therapy */
+/* Import order matters for cascade */
+@import url('variables.css');
+@import url('base.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('responsive.css');
+
+/* Custom Styles */
+/* Hero Background Gradient */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    rgba(224, 242, 241, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 50%,
+    rgba(224, 242, 241, 0.95) 100%
+  );
+}
+
+/* Medical Cyan Accents */
+.accent-cyan {
+  position: relative;
+}
+
+.accent-cyan::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background-color: var(--medical-cyan);
+  border-radius: 2px;
+}
+
+/* Service Icon Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.service-card:hover .card-icon {
+  animation: float 2s ease-in-out infinite;
+}
+
+/* Scroll Progress Indicator */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--medical-cyan), #00b8b8);
+  z-index: 1001;
+  transition: width 0.1s ease;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--light-gray);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--medical-cyan);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #00b8b8;
+}
+
+/* Selection Color */
+::selection {
+  background-color: rgba(0, 206, 209, 0.3);
+  color: var(--deep-slate);
+}
+
+/* Focus Ring for Accessibility */
+.focus-ring:focus {
+  outline: 3px solid var(--medical-cyan);
+  outline-offset: 2px;
+}
+
+/* Loading Skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--light-gray) 25%,
+    var(--medium-gray) 50%,
+    var(--light-gray) 75%
+  );
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Grid Lines (Debug) */
+.debug-grid {
+  background-image: linear-gradient(
+      rgba(0, 206, 209, 0.1) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(0, 206, 209, 0.1) 1px,
+      transparent 1px
+    );
+  background-size: 50px 50px;
+}
+
+/* Page Transition */
+.page-transition {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 3D Card Effect */
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* Glassmorphism Overlay */
+.glass-overlay {
+  position: relative;
+}
+
+.glass-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--glass-bg);
+  backdrop-filter: var(--glass-blur);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+/* Medical Pattern */
+.medical-pattern {
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(0, 206, 209, 0.1) 1px,
+    transparent 0
+  );
+  background-size: 20px 20px;
+}
+
+/* Section Dividers */
+.section-divider {
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--medical-cyan),
+    transparent
+  );
+  margin: var(--space-16) auto;
+  max-width: 800px;
+}
+
+/* CTA Pulse Animation */
+@keyframes pulse-cyan {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 206, 209, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(0, 206, 209, 0);
+  }
+}
+
+.btn-pulse {
+  animation: pulse-cyan 2s infinite;
+}
+
+/* Responsive Typography Scale */
+.typography-scale {
+  font-size: clamp(1rem, 2vw + 0.5rem, 1.25rem);
+}
+
+/* Container Query Example */
+@container card-container (min-width: 300px) {
+  .card-content {
+    padding: 1.5rem;
+  }
+}
+
+/* View Transitions API */
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(*) {
+    animation-duration: 0.5s;
+  }
+}
+
+/* Print Optimization */
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  .break-after {
+    page-break-after: always;
+  }
+
+  .break-inside-avoid {
+    page-break-inside: avoid;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  :root {
+    --medical-cyan: #008b8b;
+    --deep-slate: #000000;
+    --soft-mint: #ffffff;
+  }
+
+  .glass {
+    background: var(--pure-white);
+    border: 2px solid var(--deep-slate);
+  }
+}
+
+/* Reduced Transparency */
+@media (prefers-reduced-transparency: reduce) {
+  .glass {
+    background: var(--pure-white);
+    backdrop-filter: none;
+  }
+
+  .glass-nav {
+    background: var(--pure-white);
+    backdrop-filter: none;
+  }
+}
+
+/* Final Overrides */
+/* Ensure glassmorphism works in Safari */
+@supports not (backdrop-filter: blur(12px)) {
+  .glass {
+    background: rgba(255, 255, 255, 0.95);
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.95);
+  }
+}
+
+/* Ensure smooth scrolling works */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Custom Properties Fallback */
+.no-css-variables .glass {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.no-css-variables .btn-primary {
+  background: #00ced1;
+  color: white;
+}
+
+/* Performance Optimizations */
+.will-change-transform {
+  will-change: transform;
+}
+
+.content-visibility-auto {
+  content-visibility: auto;
+}
+
+.contain-layout {
+  contain: layout;
+}
+
+/* Custom Utility Classes */
+.clip-path-hero {
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, var(--medical-cyan), #00b8b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.border-gradient {
+  border: 2px solid transparent;
+  background: linear-gradient(var(--pure-white), var(--pure-white)) padding-box,
+              linear-gradient(135deg, var(--medical-cyan), #00b8b8) border-box;
+}

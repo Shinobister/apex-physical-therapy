@@ -1,0 +1,59 @@
+This is the final, comprehensive "Technical Blueprint" designed for **Claude Code**. It combines the architecture, the visual DNA from our generated assets, and the specific clinical philosophy of **Apex Physical Therapy**.
+
+You can copy and paste this entire block into your environment to initiate the build.
+
+---
+
+### **Project Master Prompt: Apex Physical Therapy Web System**
+
+**Objective:** Develop a high-fidelity, responsive, multi-page web application for "Apex Physical Therapy" (Rocky Hill, CT). The site must be optimized for Chrome, Safari, and all mobile/tablet viewports using a "Mobile-First" development approach.
+
+#### **1. Visual DNA & Design Language**
+* **Aesthetic:** "High-Transparency Clinical Minimalism."
+* **UI System:** Extensive use of **Glassmorphism**. Navigation bars and content cards must feature `backdrop-filter: blur(12px)`, a semi-transparent white background `rgba(255, 255, 255, 0.7)`, and a subtle `1px` solid border.
+* **Color Palette:**
+    * **Medical Cyan (`#00CED1`):** Primary action color (buttons, active icons, progress bars).
+    * **Deep Slate Blue (`#2F4F4F`):** Primary typography and grounding elements.
+    * **Soft Mint (`#E0F2F1`):** Subtle section backgrounds.
+* **Assets Reference:**
+    * *Hero Backdrop:* A wide, sunlit, minimalist clinic interior.
+    * *Icons:* Minimalist teal line-art for Orthopedics (Joint), Sports (Runner), and Manual Therapy (Hands).
+    * *Founder Portrait:* Professional headshot of Dr. Anand Bishnoi in a teal tie, integrated into the "Expert-Led" section.
+
+---
+
+#### **2. Page-by-Page Specifications**
+
+**Page 1: The Landing Page (Conversion Engine)**
+* **Hero Section:** Full-screen sunlit backdrop. Text: "RESTORE FUNCTIONAL INDEPENDENCE." Subtext: "Expert-led manual therapy and smart loading strategies in Rocky Hill, CT."
+* **The "Three Pillars" Grid:** Uses the cyan icon set to describe Orthopedics, Sports Medicine, and Manual Therapy.
+* **Philosophy Section:** Features a custom "Smart Loading" infographic showing the transition from injury to adaptive strength.
+* **Founder Spotlight:** A "Meet your Doctor" card featuring Dr. Anand Bishnoi’s portrait with a glassmorphic overlay for his credentials.
+
+**Page 2: Services & Conditions (Technical Depth)**
+* **Interactive Accordions:** Detailed breakdown of treatments (Post-Op Rehab, Spine Care, Performance Training).
+* **The "Smart Loading" Detail:** A dedicated deep-dive into the clinic’s evidence-based loading protocols using the progress-curve visual style.
+
+**Page 3: Patient Portal & Resources (Utility)**
+* **Resource Library:** Downloadable PDF links for intake forms using the UI Kit’s "Success Notification" style for download feedback.
+* **FAQ:** Glassmorphic cards addressing insurance, direct access, and what to expect during the first visit.
+
+**Page 4: Contact & Location (The Hook)**
+* **Live Integration:** Functional contact form with real-time validation (UI Kit style).
+* **Map:** Embedded Google Map pinpointing *825 Cromwell Ave, Suite Q, Rocky Hill, CT*.
+* **Action Bar:** Sticky mobile footer with "Call Now" and "Book Appointment" buttons.
+
+---
+
+#### **3. Core Functionality & UX Requirements**
+* **Sticky "Smart" Header:** The glassmorphic nav bar should shrink slightly on scroll and maintain the "Book Appointment" CTA at all times.
+* **Performance Optimization:** * Lazy-load all high-resolution clinic imagery.
+    * Ensure all transitions (hover states, page fades) occur over a `300ms` ease-in-out duration.
+* **Interactivity:**
+    * **Buttons:** Hovering over Medical Cyan buttons should trigger a "glow" effect or a slight scale-up (`1.05x`).
+    * **Scroll Reveal:** Sections should fade in and slide up slightly as the user scrolls down the page.
+* **Accessibility:** Maintain high contrast ratios for Deep Slate text against light backgrounds and include full ARIA labels for all interactive elements.
+
+---
+
+**Final Instruction to Claude:** "Execute this build using modern CSS Grid/Flexbox. Prioritize the 'Smart Loading' philosophy in the copy. Use the provided image descriptions to place placeholders where the assets will reside. Start by initializing the global CSS variables and the responsive grid system."
