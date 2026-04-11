@@ -2,6 +2,8 @@
 
 ## Quick Start - Choose One Method
 
+**4 Options Available:** Drag-and-Drop (easiest), Netlify CLI (developer), GitHub + Netlify (recommended), Automated Scripts.
+
 ### Option 1: Drag-and-Drop (Easiest)
 1. Go to [app.netlify.com](https://app.netlify.com)
 2. Sign up/login with GitHub, GitLab, or email
@@ -28,6 +30,25 @@ netlify deploy --prod
 2. Push this project to GitHub
 3. Connect Netlify to your GitHub repository
 4. Enable auto-deploy
+
+### Option 4: Automated Setup Scripts
+We've created two setup scripts to automate the process:
+
+**For Windows (CMD):**
+```bash
+setup-github.bat
+```
+
+**For Unix/macOS/Git Bash:**
+```bash
+chmod +x setup-github.sh
+./setup-github.sh
+```
+
+The scripts will:
+1. Guide you through entering your GitHub username
+2. Set up the git remote
+3. Provide step-by-step instructions for creating the repository and deploying to Netlify
 
 ## GitHub Repository Setup (for Option 3)
 
