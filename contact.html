@@ -194,34 +194,36 @@
                 <div>
                     <div class="glass-card p-8">
                         <h3 class="text-2xl mb-6" id="booking">Book an Appointment</h3>
-                        <form id="contactForm" class="space-y-6">
+                        <form id="contactForm" class="space-y-6" netlify name="contact" method="POST" data-netlify="true">
+                            <input type="hidden" name="form-name" value="contact">
+                            <div style="display: none;"><label>Don't fill this out if you're human: <input name="bot-field" /></label></div>
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="form-group">
                                     <label for="firstName" class="form-label">First Name *</label>
-                                    <input type="text" id="firstName" class="form-control" required>
+                                    <input type="text" id="firstName" name="firstName" class="form-control" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="lastName" class="form-label">Last Name *</label>
-                                    <input type="text" id="lastName" class="form-control" required>
+                                    <input type="text" id="lastName" name="lastName" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div class="form-group">
                                     <label for="phone" class="form-label">Phone *</label>
-                                    <input type="tel" id="phone" class="form-control" required>
+                                    <input type="tel" id="phone" name="phone" class="form-control" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label for="email" class="form-label">Email *</label>
-                                    <input type="email" id="email" class="form-control" required>
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="service" class="form-label">Service Interested In</label>
-                                <select id="service" class="form-control">
+                                <select id="service" name="service" class="form-control">
                                     <option value="">Select a service</option>
                                     <option value="orthopedics">Orthopedics</option>
                                     <option value="sports">Sports Medicine</option>
@@ -233,17 +235,17 @@
 
                             <div class="form-group">
                                 <label for="preferredDate" class="form-label">Preferred Appointment Date</label>
-                                <input type="date" id="preferredDate" class="form-control">
+                                <input type="date" id="preferredDate" name="preferredDate" class="form-control">
                             </div>
 
                             <div class="form-group">
                                 <label for="message" class="form-label">How Can We Help? *</label>
-                                <textarea id="message" class="form-control" rows="5" placeholder="Please describe what brings you in, any specific concerns, or questions you have..." required></textarea>
+                                <textarea id="message" name="message" class="form-control" rows="5" placeholder="Please describe what brings you in, any specific concerns, or questions you have..." required></textarea>
                             </div>
 
                             <div class="form-group">
                                 <div class="flex items-start gap-3">
-                                    <input type="checkbox" id="consent" class="mt-1" required>
+                                    <input type="checkbox" id="consent" name="consent" class="mt-1" required>
                                     <label for="consent" class="text-sm">
                                         I consent to receiving communication from Apex Physical Therapy regarding my inquiry. We respect your privacy and will not share your information.
                                     </label>
