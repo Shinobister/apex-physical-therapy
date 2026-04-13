@@ -145,13 +145,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
             let isValid = true;
 
-            // Name validation
-            const nameInput = document.getElementById('name');
-            if (!nameInput.value.trim()) {
-                showError(nameInput, 'Please enter your name');
+            // First Name validation
+            const firstNameInput = document.getElementById('firstName');
+            if (!firstNameInput.value.trim()) {
+                showError(firstNameInput, 'Please enter your first name');
                 isValid = false;
             } else {
-                clearError(nameInput);
+                clearError(firstNameInput);
+            }
+
+            // Last Name validation
+            const lastNameInput = document.getElementById('lastName');
+            if (!lastNameInput.value.trim()) {
+                showError(lastNameInput, 'Please enter your last name');
+                isValid = false;
+            } else {
+                clearError(lastNameInput);
             }
 
             // Phone validation
@@ -164,34 +173,49 @@ document.addEventListener('DOMContentLoaded', function() {
                 clearError(phoneInput);
             }
 
+            // Email validation
+            const emailInput = document.getElementById('email');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(emailInput.value.trim())) {
+                showError(emailInput, 'Please enter a valid email address');
+                isValid = false;
+            } else {
+                clearError(emailInput);
+            }
+
+            // Message validation
+            const messageInput = document.getElementById('message');
+            if (!messageInput.value.trim()) {
+                showError(messageInput, 'Please enter your message');
+                isValid = false;
+            } else {
+                clearError(messageInput);
+            }
+
+            // Consent validation
+            const consentInput = document.getElementById('consent');
+            if (!consentInput.checked) {
+                showError(consentInput, 'Please consent to receive communications');
+                isValid = false;
+            } else {
+                clearError(consentInput);
+            }
+
             if (isValid) {
-                // Show success message
+                // Show sending state
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitBtn.textContent;
-
                 submitBtn.textContent = 'Sending...';
                 submitBtn.disabled = true;
 
-                // Simulate form submission
-                setTimeout(() => {
-                    submitBtn.textContent = 'Request Sent!';
-                    submitBtn.style.backgroundColor = '#48bb78';
-
-                    // Reset form
-                    contactForm.reset();
-
-                    // Reset button after 3 seconds
-                    setTimeout(() => {
-                        submitBtn.textContent = originalText;
-                        submitBtn.disabled = false;
-                        submitBtn.style.backgroundColor = '';
-                    }, 3000);
-                }, 1500);
+                // Submit the form to Netlify
+                // This will navigate to thank-you.html via form action
+                contactForm.submit();
             }
         });
 
         // Real-time validation
-        const inputs = contactForm.querySelectorAll('input, textarea');
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
         inputs.forEach(input => {
             input.addEventListener('blur', function() {
                 validateField(this);
@@ -204,15 +228,40 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function validateField(field) {
-        if (field.id === 'name' && !field.value.trim()) {
-            showError(field, 'Please enter your name');
+        const value = field.value.trim();
+        const id = field.id;
+
+        // Clear any existing error
+        clearError(field);
+
+        // Required field validation
+        if (field.hasAttribute('required') && !value) {
+            let message = 'This field is required';
+            if (id === 'firstName') message = 'Please enter your first name';
+            else if (id === 'lastName') message = 'Please enter your last name';
+            else if (id === 'phone') message = 'Please enter a phone number';
+            else if (id === 'email') message = 'Please enter an email address';
+            else if (id === 'message') message = 'Please enter your message';
+            else if (id === 'consent') message = 'Please consent to receive communications';
+
+            showError(field, message);
             return false;
         }
 
-        if (field.id === 'phone') {
+        // Phone validation
+        if (id === 'phone' && value) {
             const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/;
-            if (!phoneRegex.test(field.value.trim())) {
+            if (!phoneRegex.test(value)) {
                 showError(field, 'Please enter a valid phone number');
+                return false;
+            }
+        }
+
+        // Email validation
+        if (id === 'email' && value) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(value)) {
+                showError(field, 'Please enter a valid email address');
                 return false;
             }
         }

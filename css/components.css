@@ -164,6 +164,42 @@
   margin-left: var(--space-4);
 }
 
+/* Medium screen adjustments for nav alignment */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .nav-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+  }
+
+  .nav-menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4);
+    order: 2;
+    width: 100%;
+    margin-top: var(--space-4);
+  }
+
+  .nav-link {
+    padding: 0.5rem 0.75rem;
+    font-size: var(--text-sm);
+  }
+
+  .nav-cta {
+    margin-left: 0;
+    margin-top: var(--space-2);
+    width: 100%;
+    text-align: center;
+    order: 3;
+  }
+
+  .nav-cta .btn {
+    width: auto;
+    display: inline-block;
+  }
+}
+
 .mobile-menu-btn {
   display: none;
   background: none;
@@ -246,7 +282,7 @@
   display: block;
   margin-bottom: var(--space-2);
   font-weight: 500;
-  color: var(--deep-slate);
+  color: var(--form-text);
 }
 
 .form-control {

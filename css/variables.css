@@ -8,6 +8,7 @@
   --light-gray: #F5F7FA;
   --medium-gray: #E1E5EB;
   --dark-gray: #4A5568;
+  --form-text: #D35400; /* Dark orange for form labels */
 
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
