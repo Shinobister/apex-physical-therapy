@@ -119,35 +119,36 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     function initCarousel(testimonialsArray) {
-        let currentSlide = 0;
-        const slidesToShow = getSlidesToShow();
-        const totalSlides = testimonialsArray.length;
-        const totalDots = Math.ceil(totalSlides / slidesToShow);
+        let currentIndex = 0;
+        let slidesToShow = getSlidesToShow();
+        const totalTestimonials = testimonialsArray.length;
 
-        // Create slides
+        // Create individual slides (one per testimonial)
         carouselTrack.innerHTML = '';
-        for (let i = 0; i < totalSlides; i += slidesToShow) {
+        testimonialsArray.forEach(testimonial => {
             const slide = document.createElement('div');
             slide.className = 'carousel-slide';
-            slide.style.display = 'flex';
-            slide.style.gap = 'var(--space-8)';
-
-            for (let j = i; j < i + slidesToShow && j < totalSlides; j++) {
-                const card = createTestimonialCard(testimonialsArray[j]);
-                slide.appendChild(card);
-            }
+            const card = createTestimonialCard(testimonial);
+            slide.appendChild(card);
             carouselTrack.appendChild(slide);
-        }
+        });
+
+        const totalSlides = totalTestimonials;
+        let maxIndex = Math.max(0, totalSlides - slidesToShow);
+        let totalDots = slidesToShow >= totalSlides ? 1 : Math.ceil(totalSlides / slidesToShow);
 
         // Create dots
-        carouselDots.innerHTML = '';
-        for (let i = 0; i < totalDots; i++) {
-            const dot = document.createElement('button');
-            dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
-            dot.setAttribute('aria-label', `Go to testimonial group ${i + 1}`);
-            dot.addEventListener('click', () => goToSlide(i));
-            carouselDots.appendChild(dot);
+        function createDots() {
+            carouselDots.innerHTML = '';
+            for (let i = 0; i < totalDots; i++) {
+                const dot = document.createElement('button');
+                dot.className = `carousel-dot ${i === 0 ? 'active' : ''}`;
+                dot.setAttribute('aria-label', `Go to testimonial group ${i + 1}`);
+                dot.addEventListener('click', () => goToSlide(i));
+                carouselDots.appendChild(dot);
+            }
         }
+        createDots();
 
         // Set up button events
         const prevBtn = document.querySelector('.carousel-btn-prev');
@@ -170,40 +171,66 @@ document.addEventListener('DOMContentLoaded', function() {
             return 1;
         }
 
+        // Calculate translation percentage accounting for gap
+        function getTranslatePercent(index) {
+            const container = carouselTrack.parentElement;
+            if (!container) return index * (100 / slidesToShow);
+
+            const containerWidth = container.offsetWidth;
+            if (containerWidth === 0) return index * (100 / slidesToShow);
+
+            // Get gap from computed style
+            const trackStyle = window.getComputedStyle(carouselTrack);
+            const gap = parseFloat(trackStyle.gap) || 0; // in pixels
+
+            // Gap as percentage of container
+            const gapPercent = (gap / containerWidth) * 100;
+
+            // Each slide takes (100% - (slidesToShow-1)*gapPercent)/slidesToShow
+            // Distance between slides = slideWidth + gap = (100% + gapPercent)/slidesToShow
+            const slideStepPercent = (100 + gapPercent) / slidesToShow;
+            return index * slideStepPercent;
+        }
+
         function updateCarousel() {
-            const slideWidth = 100 / slidesToShow;
-            carouselTrack.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+            const translatePercent = getTranslatePercent(currentIndex);
+            carouselTrack.style.transform = `translateX(-${translatePercent}%)`;
 
             // Update dots
+            const activeDotIndex = Math.floor(currentIndex / slidesToShow);
             document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
-                dot.classList.toggle('active', index === currentSlide);
+                dot.classList.toggle('active', index === activeDotIndex);
             });
         }
 
         function nextSlide() {
-            const slidesToShow = getSlidesToShow();
-            const totalSlides = testimonialsArray.length;
-            const totalGroups = Math.ceil(totalSlides / slidesToShow);
-            currentSlide = (currentSlide + 1) % totalGroups;
+            slidesToShow = getSlidesToShow();
+            maxIndex = Math.max(0, totalSlides - slidesToShow);
+            if (currentIndex >= maxIndex) {
+                currentIndex = 0; // Loop back to start
+            } else {
+                currentIndex++;
+            }
             updateCarousel();
         }
 
         function prevSlide() {
-            const slidesToShow = getSlidesToShow();
-            const totalSlides = testimonialsArray.length;
-            const totalGroups = Math.ceil(totalSlides / slidesToShow);
-            currentSlide = (currentSlide - 1 + totalGroups) % totalGroups;
+            slidesToShow = getSlidesToShow();
+            maxIndex = Math.max(0, totalSlides - slidesToShow);
+            if (currentIndex <= 0) {
+                currentIndex = maxIndex; // Loop to end
+            } else {
+                currentIndex--;
+            }
             updateCarousel();
         }
 
-        function goToSlide(index) {
-            const slidesToShow = getSlidesToShow();
-            const totalSlides = testimonialsArray.length;
-            const totalGroups = Math.ceil(totalSlides / slidesToShow);
-            if (index >= 0 && index < totalGroups) {
-                currentSlide = index;
-                updateCarousel();
-            }
+        function goToSlide(dotIndex) {
+            slidesToShow = getSlidesToShow();
+            maxIndex = Math.max(0, totalSlides - slidesToShow);
+            // dotIndex corresponds to group index
+            currentIndex = Math.min(dotIndex * slidesToShow, maxIndex);
+            updateCarousel();
         }
 
         // Update on window resize
@@ -212,9 +239,22 @@ document.addEventListener('DOMContentLoaded', function() {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 const newSlidesToShow = getSlidesToShow();
-                // Reinitialize if slides per view changes
                 if (newSlidesToShow !== slidesToShow) {
-                    initCarousel(testimonialsArray);
+                    slidesToShow = newSlidesToShow;
+                    maxIndex = Math.max(0, totalSlides - slidesToShow);
+                    totalDots = slidesToShow >= totalSlides ? 1 : Math.ceil(totalSlides / slidesToShow);
+
+                    // Update current index if out of bounds
+                    if (currentIndex > maxIndex) {
+                        currentIndex = maxIndex;
+                    }
+
+                    // Recreate dots
+                    createDots();
+                    updateCarousel();
+                } else {
+                    // Even if slidesToShow unchanged, update translation for possible container width change
+                    updateCarousel();
                 }
             }, 250);
         });
