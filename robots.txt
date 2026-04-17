@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /thank-you.html  # Temporary - can be indexed but low priority
+
+Sitemap: https://apexphysicaltherapy.com/sitemap.xml

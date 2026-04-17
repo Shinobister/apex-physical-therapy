@@ -8,7 +8,8 @@
   --light-gray: #F5F7FA;
   --medium-gray: #E1E5EB;
   --dark-gray: #4A5568;
-  --form-text: #D35400; /* Dark orange for form labels */
+  --form-text: #1A2A2A; /* Dark slate for form labels - WCAG compliant */
+  --btn-text: #000000; /* Button text color for contrast */
 
   /* Typography */
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;

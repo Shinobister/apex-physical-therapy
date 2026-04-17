@@ -294,4 +294,9 @@
     padding: 0.625rem 1.25rem;
     font-size: var(--text-sm);
   }
+
+  .form-control {
+    padding: 0.625rem 0.875rem;
+    font-size: var(--text-base);
+  }
 }
