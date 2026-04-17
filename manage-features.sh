@@ -123,10 +123,8 @@ start_feature() {
     echo "🚀 Starting feature: $feature"
     echo "=============================="
 
-    # Run the startup script
-    cd "$feature_dir"
-    ./startup.sh
-    cd - > /dev/null
+    # Run the startup script from project root
+    "$startup_script"
 
     echo ""
     echo "✅ Feature '$feature' startup complete!"
@@ -160,10 +158,8 @@ finalize_feature() {
     echo "🎉 Finalizing feature: $feature"
     echo "================================"
 
-    # Run the final script
-    cd "$feature_dir"
-    ./final.sh
-    cd - > /dev/null
+    # Run the final script from project root
+    "$final_script"
 
     echo ""
     echo "✅ Feature '$feature' finalized!"

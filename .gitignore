@@ -59,6 +59,7 @@ ai-cache/
 # Development files
 *.local
 *.backup
+.claude/
 
 # Logs
 logs

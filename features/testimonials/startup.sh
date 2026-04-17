@@ -5,6 +5,11 @@
 
 set -e  # Exit on error
 
+# If running from within features directory, change to project root
+if [[ "$PWD" == *"/features/"* ]]; then
+    cd "$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD/../..")"
+fi
+
 echo "🚀 Starting Testimonials Feature Setup..."
 echo "========================================="
 
@@ -62,6 +67,7 @@ EOF
 echo "📄 Created testimonials.html template"
 
 # Create testimonials JavaScript file
+mkdir -p js
 cat > js/testimonials.js << 'EOF'
 // Testimonials Feature JavaScript
 document.addEventListener('DOMContentLoaded', function() {

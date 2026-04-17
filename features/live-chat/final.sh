@@ -5,6 +5,11 @@
 
 set -e
 
+# If running from within features directory, change to project root
+if [[ "$PWD" == *"/features/"* ]]; then
+    cd "$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD/../..")"
+fi
+
 echo "🎉 Finalizing Live Chat Feature"
 echo "================================"
 

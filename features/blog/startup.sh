@@ -5,6 +5,11 @@
 
 set -e
 
+# If running from within features directory, change to project root
+if [[ "$PWD" == *"/features/"* ]]; then
+    cd "$(git rev-parse --show-toplevel 2>/dev/null || echo "$PWD/../..")"
+fi
+
 echo "🚀 Starting Blog Feature Setup..."
 echo "================================="
 
@@ -83,6 +88,7 @@ EOF
 echo "📄 Created blog.html"
 
 # Create blog CSS
+mkdir -p css
 cat > css/blog.css << 'EOF'
 /* Blog-specific styles */
 
@@ -161,6 +167,7 @@ EOF
 echo "📄 Created css/blog.css"
 
 # Create blog JavaScript
+mkdir -p js
 cat > js/blog.js << 'EOF'
 // Blog Feature JavaScript
 
